@@ -1,0 +1,76 @@
+#include <ECS/man/entitymanager.hpp>
+#include <Game/sys/render.hpp>
+#include <Game/sys/physics.hpp>
+#include <raylib.h>
+
+//Constructor
+template <typename GameCTX_t>
+RenderSystem_t<GameCTX_t>::RenderSystem_t(uint32_t width, uint32_t height)
+    :m_width(width), m_height(height)
+{
+    InitWindow(width, height, "window");
+    SetTargetFPS(60);
+}
+
+//Destructor
+template <typename GameCTX_t>
+RenderSystem_t<GameCTX_t>::~RenderSystem_t(){
+    CloseWindow();
+}
+template <typename GameCTX_t>
+bool 
+RenderSystem_t<GameCTX_t>::update(const GameCTX_t& g) const {
+    beginFrame();
+    drawAllEntities(g);
+    endFrame();
+    return !WindowShouldClose();
+}
+
+template <typename GameCTX_t>
+void
+RenderSystem_t<GameCTX_t>::beginFrame() const {
+    BeginDrawing();
+    ClearBackground(WHITE);
+}
+
+template <typename GameCTX_t>
+void
+RenderSystem_t<GameCTX_t>::endFrame() const {
+    EndDrawing();
+}
+
+template <typename GameCTX_t>
+void
+RenderSystem_t<GameCTX_t>::drawAllEntities(const GameCTX_t& g) const {
+    const auto& physics = g.getComponents<PhysicsComponent_t>();
+    const auto& render  = g.getComponents<RenderComponent_t>();
+    //Buscar su componente de fisica asociado
+    for (const auto& ren : g.getComponents<RenderComponent_t>()) {
+        const auto* entity = g.getEntityByID(ren.getEntityID());
+        if (entity && entity->phy) {
+            drawEntity(ren, *entity->phy);
+        }
+    }
+}
+
+template <typename GameCTX_t>
+void
+RenderSystem_t<GameCTX_t>::drawEntity(const RenderComponent_t& ren, const PhysicsComponent_t& phy) const {
+    if (ren.hasTexture){
+        DrawTextureEx(
+            ren.texture,
+            { static_cast<float>(phy.posX), static_cast<float>(phy.posY) },
+            0.0f,
+            1.0f,
+            WHITE
+        );
+    } else {
+        DrawRectangle(
+            static_cast<int>(phy.posX),
+            static_cast<int>(phy.posY),
+            static_cast<int>(ren.h),
+            static_cast<int>(ren.w),
+            ren.color
+        );
+    }
+}
