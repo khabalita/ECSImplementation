@@ -13,19 +13,8 @@ struct Entity_t {
     //add component
     template <typename CMP_t>
     void addComponent(CMP_t& cmp){
-        auto type = cmp.GetComponentTypeID();
+        auto type = cmp.getComponentTypeID();
         m_components[type] = &cmp;
-    }
-
-    //get component
-    template <typename CMP_t>
-    CMP_t* getComponent(){
-        auto type = CMP_t::getComponentTypeID();
-        auto iterator = m_components.find(type);
-        if (iterator != m_components.end()){
-            return static_cast<CMP_t*>(iterator->second);
-        }
-        return nullptr;
     }
 
     //get component const
@@ -39,9 +28,17 @@ struct Entity_t {
         return nullptr;
     }
 
+    template <typename CMP_t>
+    CMP_t* getComponent() {
+        auto& cmp = const_cast<const Entity_t*>(this)->getComponent<CMP_t>();
+        return const_cast<CMP_t*>(cmp);
+    }
+
+    constexpr EntityID_t getEntityID() const noexcept { return entityID; }
+// MAL
 private:
     Hash_t<ComponentTypeID_t, Component_t*> m_components;
-    EntityID_t entityID { nextID };
+    EntityID_t entityID { ++nextID };
     inline static EntityID_t nextID { 0 };
 };
 

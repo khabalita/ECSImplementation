@@ -17,8 +17,8 @@ struct Component_t {
 protected:
     // inline --> hace la declaracion y definicion de una sola vez
     inline static ComponentTypeID_t nextTypeID { 0 };
-private:
 
+private:
     EntityID_t entityID { 0 };
 };
 
@@ -27,7 +27,8 @@ struct ComponentBase_t : Component_t{
     explicit ComponentBase_t(EntityID_t eid)
         : Component_t(eid)
     {}
-    static ComponentTypeID_t getComponentTypeID() noexcept {;
+
+    static ComponentTypeID_t getComponentTypeID() noexcept {
         static ComponentTypeID_t typeID { ++nextTypeID};
         return typeID;
     }

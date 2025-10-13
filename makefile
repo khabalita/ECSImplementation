@@ -76,4 +76,4 @@ $(OBJSUBDIRS):
 $(ALLOBJ): | $(OBJSUBDIRS)
 
 clean:
-	rm -f $(APP) $(ALLOBJ)
+	rm -f $(OBJ) $(APP)

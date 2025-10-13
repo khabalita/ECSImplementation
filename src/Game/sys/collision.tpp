@@ -5,21 +5,24 @@
 template <typename GameCTX_t>
 bool
 CollisionSystem_t<GameCTX_t>::update(GameCTX_t& g) const {
-    for(auto& e: g.getEntities()){
+    for (auto& e : g.getEntities()) {
+        auto* phy = e.template getComponent<PhysicsComponent_t>();
+        auto* ren = e.template getComponent<RenderComponent_t>();
         //compruebo colision en X
-        if(e.phy && e.ren){
-            if(e.phy->posX < 640 || e.phy->posX + e.ren->w > 640)
+        if(phy && ren){
+            if(phy->posX < 640 || phy->posX + ren->w > 640)
             {
-                e.phy->velY -= e.phy->velX; 
-                e.phy->velX = -e.phy->velX;
+                phy->velY -= phy->velX; 
+                phy->velX = -phy->velX;
             };
             //compruebo colision en Y
-            if(e.phy->posY < 360 || e.phy->posY + e.ren->h > 360)
+            if(phy->posY < 360 || phy->posY + ren->h > 360)
             {
-                e.phy->posY -= e.phy->velY; 
-                e.phy->velY = -e.phy->velY;
+                phy->posY -= phy->velY; 
+                phy->velY = -phy->velY;
             };
         }
     }
+    return true;
 }
 

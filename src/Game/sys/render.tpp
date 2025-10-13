@@ -42,21 +42,21 @@ RenderSystem_t<GameCTX_t>::endFrame() const {
 template <typename GameCTX_t>
 void
 RenderSystem_t<GameCTX_t>::drawAllEntities(const GameCTX_t& g) const {
-    const auto& physics = g.getComponents<PhysicsComponent_t>();
-    const auto& render  = g.getComponents<RenderComponent_t>();
-    //Buscar su componente de fisica asociado
-    for (const auto& ren : g.getComponents<RenderComponent_t>()) {
-        const auto* entity = g.getEntityByID(ren.getEntityID());
-        if (entity && entity->phy) {
-            drawEntity(ren, *entity->phy);
+    for (const auto& entity : g.getEntities()) {
+
+        const auto* phy = entity.template getComponent<PhysicsComponent_t>();
+        const auto* ren = entity.template getComponent<RenderComponent_t>();
+
+        if (phy && ren) {
+            drawEntity(*ren, *phy);
         }
     }
 }
 
 template <typename GameCTX_t>
 void
-RenderSystem_t<GameCTX_t>::drawEntity(const RenderComponent_t& ren, const PhysicsComponent_t& phy) const {
-    if (ren.hasTexture){
+RenderSystem_t<GameCTX_t>::drawEntity( const RenderComponent_t& ren, const PhysicsComponent_t& phy) const {
+    if (ren.hasTexture) {
         DrawTextureEx(
             ren.texture,
             { static_cast<float>(phy.posX), static_cast<float>(phy.posY) },
@@ -68,8 +68,8 @@ RenderSystem_t<GameCTX_t>::drawEntity(const RenderComponent_t& ren, const Physic
         DrawRectangle(
             static_cast<int>(phy.posX),
             static_cast<int>(phy.posY),
-            static_cast<int>(ren.h),
             static_cast<int>(ren.w),
+            static_cast<int>(ren.h),
             ren.color
         );
     }

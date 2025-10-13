@@ -84,7 +84,7 @@ struct ComponentStorage_t {
         // !-- Chequear que realemnte uso ITERATOR --!
         auto iterator = m_componentVectors.find(typeID);
         if (iterator != m_componentVectors.end()) {
-            auto* v = static_cast<ComponentVector_t<CMP_t>*>(iterator->second)
+            auto* v = static_cast<ComponentVector_t<CMP_t>*>(iterator->second);
             comvec = &v->components;
         } else {
             throw "Estoy intentando modificar algo que no puedo";

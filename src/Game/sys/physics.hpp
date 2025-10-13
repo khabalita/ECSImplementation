@@ -1,5 +1,5 @@
 #pragma once
-#include <util/typealiases.hpp>
+#include <ECS/util/typealiases.hpp>
 
 template <typename GameCTX_t>
 struct PhysicsSystem_t {
