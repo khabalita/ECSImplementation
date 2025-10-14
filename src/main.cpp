@@ -5,6 +5,7 @@
 #include <Game/sys/render.tpp>
 #include <Game/sys/collision.tpp>
 #include <Game/sys/physics.tpp>
+#include <Game/cmp/collider.hpp>
 #include <raylib.h>
 
 constexpr uint32_t kSCRWIDTH  { 640 };
@@ -16,7 +17,12 @@ createEntity(ECS::EntityManager_t& em, uint32_t x, uint32_t y, const std::string
     auto& entity   = em.createEntity();
     auto& ren      = em.addComponent<RenderComponent_t>(entity);
     auto& phy      = em.addComponent<PhysicsComponent_t>(entity);
+    auto& col      = em.addComponent<ColliderComponent_t>(entity);
     phy.posX = x; phy.posY = y;
+    col.box.xLeft   = 0;
+    col.box.xRight  = ren.w;
+    col.box.yUp     = 0;
+    col.box.yDown   = ren.h;
     return entity;
 }
 

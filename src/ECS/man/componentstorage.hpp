@@ -47,55 +47,52 @@ struct ComponentStorage_t {
         auto& cmp = v.emplace_back(eid);
         return cmp;
     }
-
-    // Create VectorComponents
+    // En createComponentVector():
     template <typename CMP_t>
     Vec_t<CMP_t>& createComponentVector(){
         auto typeID = CMP_t::getComponentTypeID();
         auto v = std::make_unique<ComponentVector_t<CMP_t>>();
         v->components.reserve(m_initialSize);
-        auto* vecptr = v.get();
+    
+        // Simplificación:
+        Vec_t<CMP_t>& result = v->components; // Guarda la referencia al vector
         m_componentVectors[typeID] = std::move(v);
-        return vecptr->components;
+    
+        return result; // Retorna la referencia guardada
     }
     
-    // Get Components No Const
+    // metodo no const
     template <typename CMP_t>
-    Vec_t<CMP_t>& getComponents(){
-        Vec_t<CMP_t>* comvec { nullptr };
+    Vec_t<CMP_t>& getComponents() {
         auto typeID = CMP_t::getComponentTypeID();
-        auto iterator = m_componentVectors.find(typeID);
-        if (iterator != m_componentVectors.end()) {
-            auto* v = static_cast<ComponentVector_t<CMP_t>*>(iterator->second);
-            // !-- Chequear que realemnte uso COMVEC --!
-            comvec = &v->components;
-        } else {
-            comvec = &createComponentVector<CMP_t>();
+        auto it = m_componentVectors.find(typeID);
+
+        if (it == m_componentVectors.end()) {
+            return createComponentVector<CMP_t>();
         }
-        return *comvec;
+
+        auto* v = static_cast<ComponentVector_t<CMP_t>*>(it->second.get());
+        return v->components;   
     }
 
-    //Get Components Const
-    //no puedo permitir que modifique o cree datos, solo que los lea
+    // metodo const
     template <typename CMP_t>
     const Vec_t<CMP_t>& getComponents() const {
-        Vec_t<CMP_t>* comvec { nullptr };
         auto typeID = CMP_t::getComponentTypeID();
-        // !-- Chequear que realemnte uso ITERATOR --!
         auto iterator = m_componentVectors.find(typeID);
+    
         if (iterator != m_componentVectors.end()) {
-            auto* v = static_cast<ComponentVector_t<CMP_t>*>(iterator->second);
-            comvec = &v->components;
+            // Obtenemos el puntero del unique_ptr y lo casteamos al tipo derivado const
+            auto* v = static_cast<const ComponentVector_t<CMP_t>*>(iterator->second.get());
+            return v->components; // Retorna la referencia const directamente
         } else {
-            throw "Estoy intentando modificar algo que no puedo";
-            //comvec = &createComponentVector();
+            // En un método const, no se puede crear el vector. Lanzar excepción es la acción correcta.
+            throw std::runtime_error("No se puede obtener componente const porque no existe y no se permite su creacion.");
         }
-        return *comvec;
-        
     }
 
 private:
-    Hash_t<ComponentTypeID_t, ComponentVectorBase_t*> m_componentVectors;
+    Hash_t<ComponentTypeID_t, std::unique_ptr<ComponentVectorBase_t>> m_componentVectors;
     std::size_t m_initialSize { 100 };
 
 };

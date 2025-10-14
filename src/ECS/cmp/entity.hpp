@@ -30,7 +30,7 @@ struct Entity_t {
 
     template <typename CMP_t>
     CMP_t* getComponent() {
-        auto& cmp = const_cast<const Entity_t*>(this)->getComponent<CMP_t>();
+        const auto cmp = static_cast<const Entity_t*>(this)->getComponent<CMP_t>();
         return const_cast<CMP_t*>(cmp);
     }
 

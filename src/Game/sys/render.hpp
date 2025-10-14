@@ -3,7 +3,7 @@
 #include <memory>
 #include <ECS/util/typealiases.hpp>
 
-struct EntityManager_t;
+//struct EntityManager_t;
 struct RenderComponent_t;
 struct PhysicsComponent_t;
 
