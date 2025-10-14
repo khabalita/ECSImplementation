@@ -25,8 +25,8 @@ CollisionSystem_t<GameCTX_t>::update(GameCTX_t& g) const {
         if(!phy) continue;
 
         // convierte las coordenadas de sprites en coordenadas de pantalla
-        auto xL { phy->posX + col.box.xleft  };
-        auto xR { phy->posX + col.box.xright };
+        auto xL { phy->posX + col.box.xLeft  };
+        auto xR { phy->posX + col.box.xRight };
         auto yU { phy->posY + col.box.yUp    };
         auto yD { phy->posY + col.box.yDown  };
 

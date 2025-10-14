@@ -21,10 +21,10 @@ define C2H
 $(patsubst %.c,%.h,$(patsubst %.cpp,%.hpp,$(1)))
 endef
 
-APP 	 := ECS
+APP 	 := Game
 CCFLAGS  := -Wall -Wextra -pedantic -std=c++20 -I$(shell brew --prefix raylib)/include -Isrc#Flags de compilacion
 CFLAGS   := -Wall -pedantic 
-CC 	     := clang #Compilador de C++
+CC 	     := clang++ #Compilador de C++
 C		 := gcc #Compilador de C
 MKDIR    := mkdir -p
 SRC		 := src

@@ -39,7 +39,7 @@ int main (){
         //Systems
         const RenderSystem_t<ECS::EntityManager_t> Render{ kSCRWIDTH, kSCRHEIGHT};
         PhysicsSystem_t<ECS::EntityManager_t> Physics;
-        CollisionSystem_t<ECS::EntityManager_t> Collision;
+        CollisionSystem_t<ECS::EntityManager_t> Collision{ kSCRWIDTH, kSCRHEIGHT };
 
         //Entities
         ECS::EntityManager_t entityMan;
