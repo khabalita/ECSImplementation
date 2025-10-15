@@ -20,7 +20,7 @@ struct Keyboard_t {
 
     //metodo para obtener el estado de la tecla especifica
     bool isKeyDown(int key) const noexcept {
-        if (key >0 && key <= key_states.size()){
+        if (key >0 && static_cast<size_t>(key) <= key_states.size()){
             return key_states[key];
         }
         return false;

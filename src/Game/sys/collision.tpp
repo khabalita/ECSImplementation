@@ -8,20 +8,10 @@ CollisionSystem_t<GameCTX_t>::CollisionSystem_t(uint32_t w, uint32_t h)
 {}
 
 template <typename GameCTX_t>
-PhysicsComponent_t*
-CollisionSystem_t<GameCTX_t>::getRequiredComponent(GameCTX_t& g, const ColliderComponent_t& col) const {
-    auto* e = g.getEntityByID( col.getEntityID() );
-    if (e) {
-        return e->template getComponent<PhysicsComponent_t>();
-    }
-    return nullptr;
-};
-
-template <typename GameCTX_t>
 bool
 CollisionSystem_t<GameCTX_t>::update(GameCTX_t& g) const {
     for (auto& col : g.template getComponents<ColliderComponent_t>()) {
-        auto* phy = getRequiredComponent(g, col);
+        auto* phy = g.template getRequiredComponent<ColliderComponent_t, PhysicsComponent_t>(col);
         if(!phy) continue;
 
         // convierte las coordenadas de sprites en coordenadas de pantalla
