@@ -56,7 +56,7 @@ RenderSystem_t<GameCTX_t>::drawAllEntities(const GameCTX_t& g) const {
 template <typename GameCTX_t>
 void
 RenderSystem_t<GameCTX_t>::drawEntity( const RenderComponent_t& ren, const PhysicsComponent_t& phy) const {
-    if (ren.hasTexture) {
+    if (ren.hasTexture && ren.texture) {
         DrawTextureEx(
             *ren.texture,
             { static_cast<float>(phy.posX), static_cast<float>(phy.posY) },

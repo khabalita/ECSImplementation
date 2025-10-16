@@ -27,6 +27,7 @@ struct EntityManager_t {
         return getEntityByID( cmp.getEntityID() );
     }
 
+    // version const
     template <typename CMP_t, typename ReqCMP_t>
     const ReqCMP_t* getRequiredComponent(const CMP_t& cmp) const {
         auto* e = getEntityFromComponent(cmp);
@@ -36,6 +37,7 @@ struct EntityManager_t {
         return nullptr;
     }
 
+    // version no const
     template <typename CMP_t, typename ReqCMP_t>
     ReqCMP_t* getRequiredComponent(const CMP_t& cmp){
         const ReqCMP_t* reqCom = const_cast<const EntityManager_t*>(this)->getRequiredComponent<CMP_t, ReqCMP_t>(cmp);

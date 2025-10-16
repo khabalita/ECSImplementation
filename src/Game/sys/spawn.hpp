@@ -9,7 +9,6 @@ template <typename GameCTX_t>
 struct SpawnerSystem_t {
 
     explicit SpawnerSystem_t() = default;
-    PhysicsComponent_t* getRequiredComponent(GameCTX_t& g, const SpawnerComponent_t& spw) const;
     void update(GameCTX_t& g) const;
 
 };

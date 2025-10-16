@@ -18,6 +18,7 @@ struct ResourceManager_t{
     ResourceManager_t& operator=(ResourceManager_t&&) = delete;
 
     Texture2D& getTexture(const std::string& filename);
+    const Texture2D& getTexture(const std::string& filename) const;
 
 private:
     std::unordered_map<std::string, Texture2D> m_texture;

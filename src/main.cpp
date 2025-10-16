@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cstdint>
 #include <ECS/man/entitymanager.hpp>
@@ -27,7 +26,8 @@ int main (){
 
         //Entities
         ECS::EntityManager_t EntityMan;
-        GameObjectFactory_t GOFactory { EntityMan};
+        ECS::ResourceManager_t ResourceMan;
+        GameObjectFactory_t GOFactory { EntityMan, ResourceMan};
         GOFactory.createPlayer(50, 200);
         GOFactory.createSpawner(200, 1,
             [&](const SpawnerComponent_t& sp){ //funcion lambda (explorar mas tarde)
@@ -37,7 +37,7 @@ int main (){
                 if (!phy) return;
                 auto& entity = GOFactory.createPlayer(phy->posX, phy->posY);
                 std::cout << "Test Lambda \n";
-        });
+        }); 
 
         //main
         while (Render.update( EntityMan )) {

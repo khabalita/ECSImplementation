@@ -1,2 +1,8 @@
 *.drawio
 
+# 1- ignora la carpeta assets
+assets/
+
+# 2- re incluye
+
+!assets/.gitignore
