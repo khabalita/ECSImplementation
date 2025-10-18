@@ -19,7 +19,7 @@ RenderSystem_t<GameCTX_t>::~RenderSystem_t(){
 }
 template <typename GameCTX_t>
 bool 
-RenderSystem_t<GameCTX_t>::update(const GameCTX_t& g) const {
+RenderSystem_t<GameCTX_t>::update(const GameCTX_t& g) const { // Update se esta ejecutando
     beginFrame();
     drawAllEntities(g);
     endFrame();
@@ -43,7 +43,7 @@ template <typename GameCTX_t>
 void
 RenderSystem_t<GameCTX_t>::drawAllEntities(const GameCTX_t& g) const {
     for (const auto& entity : g.getEntities()) {
-
+        std::cout << "  Checking entity ID: " << entity.getEntityID() << "\n";
         const auto* phy = entity.template getComponent<PhysicsComponent_t>();
         const auto* ren = entity.template getComponent<RenderComponent_t>();
 
@@ -56,21 +56,14 @@ RenderSystem_t<GameCTX_t>::drawAllEntities(const GameCTX_t& g) const {
 template <typename GameCTX_t>
 void
 RenderSystem_t<GameCTX_t>::drawEntity( const RenderComponent_t& ren, const PhysicsComponent_t& phy) const {
-    if (ren.hasTexture && ren.texture) {
+ 
+    if (ren.texture && ren.texture->id !=0) {
         DrawTextureEx(
             *ren.texture,
             { static_cast<float>(phy.posX), static_cast<float>(phy.posY) },
             0.0f,
             1.0f,
             WHITE
-        );
-    } else {
-        DrawRectangle(
-            static_cast<int>(phy.posX),
-            static_cast<int>(phy.posY),
-            static_cast<int>(ren.w),
-            static_cast<int>(ren.h),
-            ren.color
         );
     }
 }

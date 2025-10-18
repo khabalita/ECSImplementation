@@ -40,11 +40,11 @@ struct ComponentStorage_t {
     // !-- TEMPLATE --!
 
     // Create Components
-    template <typename CMP_t>
+    template <typename CMP_t, typename... Args>
     CMP_t&
-    createComponent(EntityID_t eid){
+    createComponent(EntityID_t eid, Args&&... args){
         auto& v= getComponents<CMP_t>();
-        auto& cmp = v.emplace_back(eid);
+        auto& cmp = v.emplace_back(eid, std::forward<Args>(args)...);
         return cmp;
     }
     // En createComponentVector():

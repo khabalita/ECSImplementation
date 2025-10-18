@@ -2,6 +2,7 @@
 #include <string>
 #include <raylib.h>
 #include <unordered_map>
+#include <memory>
 
 namespace ECS {
     
@@ -21,7 +22,7 @@ struct ResourceManager_t{
     const Texture2D& getTexture(const std::string& filename) const;
 
 private:
-    std::unordered_map<std::string, Texture2D> m_texture;
+    std::unordered_map<std::string, std::unique_ptr<Texture2D>> m_texture;
 };
 
 } // namespace ECS

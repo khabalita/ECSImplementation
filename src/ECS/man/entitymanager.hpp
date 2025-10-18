@@ -12,7 +12,8 @@ struct EntityManager_t {
 
 
     Entity_t& createEntity(){
-      return m_Entity.emplace_back();
+      m_Entity.emplace_back();
+      return m_Entity.back();
     }
 
     // version no const
@@ -44,12 +45,12 @@ struct EntityManager_t {
         return const_cast<ReqCMP_t*>(reqCom);
     }
 
-    //add component
-    template <typename CMP_t>
-    CMP_t& addComponent(Entity_t& e) {
+    //add component con uso de typename ARGS que permite el paso de 0 a N numeros de parametros
+    template <typename CMP_t, typename... Args>
+    CMP_t& addComponent(Entity_t& e, Args&&... args) {
         CMP_t* cmp_ptr { e.getComponent<CMP_t>() };
         if ( !cmp_ptr ) {
-            auto& cmp = m_components.createComponent<CMP_t>(e.getEntityID());
+            auto& cmp = m_components.createComponent<CMP_t>(e.getEntityID(), std::forward<Args>(args)...);
             e.addComponent(cmp);
             cmp_ptr = &cmp;
         }

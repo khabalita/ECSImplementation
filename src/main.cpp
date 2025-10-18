@@ -17,11 +17,11 @@ int main (){
     try{
 
         //Systems
-        const RenderSystem_t<ECS::EntityManager_t> Render{ kSCRWIDTH, kSCRHEIGHT};
+        RenderSystem_t<ECS::EntityManager_t> Render{ kSCRWIDTH, kSCRHEIGHT};
         PhysicsSystem_t<ECS::EntityManager_t> Physics;
         CollisionSystem_t<ECS::EntityManager_t> Collision{ kSCRWIDTH, kSCRHEIGHT };
         // !REVISAR INPUT!
-        InputSystem_t<ECS::EntityManager_t> Input(ECS::Keyboard_t kb);
+        InputSystem_t<ECS::EntityManager_t> Input (ECS::Keyboard_t kb);
         SpawnerSystem_t<ECS::EntityManager_t> Spawn;
 
         //Entities

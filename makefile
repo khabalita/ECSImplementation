@@ -24,8 +24,9 @@ endef
 APP 	 := Game
 CCFLAGS  := -Wall -Wextra -pedantic -std=c++20 -I$(shell brew --prefix raylib)/include -Isrc#Flags de compilacion
 CFLAGS   := -Wall -pedantic 
-CC 	     := clang++ #Compilador de C++
+CC 	     := clang++ -fsanitize=address #Compilador de C++
 C		 := gcc #Compilador de C
+SANITIZE := -fsanitize=address #flag para detectar fugas de memoria o acceso restringido (en etapa de linker)
 MKDIR    := mkdir -p
 SRC		 := src
 OBJ		 := obj
@@ -55,7 +56,7 @@ OBJSUBDIRS  := $(patsubst $(SRC)%,$(OBJ)%,$(SUBDIRS))
 #Regla principal
 #la izquierda se genera a partir de la derecha
 $(APP) : $(OBJSUBDIRS) $(ALLOBJ)
-	$(CC) -o $(APP) $(ALLOBJ) $(LIBS)
+	$(CC) -o $(APP) $(ALLOBJ) $(LIBS) $(SANITIZE)
 
 $(foreach F,$(ALLCPPS),$(eval $(call COMPILE,$(CC),$(call C2O,$(F)),$(F),$(call C2H,$(F)),$(CCFLAGS))))
 $(foreach F,$(ALLCS),$(eval $(call COMPILE,$(C),$(call C2O,$(F)),$(F),$(call C2H,$(F)),$(CFLAGS))))
@@ -76,4 +77,5 @@ $(OBJSUBDIRS):
 $(ALLOBJ): | $(OBJSUBDIRS)
 
 clean:
-	rm -f $(OBJ) $(APP)
+	rm -rf $(OBJ) 
+	rm -f $(APP)
