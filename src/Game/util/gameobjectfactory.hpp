@@ -29,7 +29,7 @@ struct GameObjectFactory_t{
         auto& phy    = m_EntMan.addComponent<PhysicsComponent_t>(entity);
         m_EntMan.addComponent<ColliderComponent_t>(entity);
         phy.posX = x; phy.posY = y;
-        phy.velX = 1;
+        phy.velX = 0;
 
         spw.spawnMethod = callback;
    return entity;

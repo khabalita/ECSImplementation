@@ -8,7 +8,7 @@
 struct InputComponent_t : public ECS::ComponentBase_t<InputComponent_t>{
     explicit InputComponent_t(ECS::EntityID_t eid)
         : ComponentBase_t(eid)
-    {};
+    {}
 
     bool moveLeft   { false };
     bool moveRight  { false };

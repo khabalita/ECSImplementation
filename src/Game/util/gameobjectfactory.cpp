@@ -26,5 +26,6 @@ ECS::Entity_t&
 GameObjectFactory_t::createPlayer(uint32_t x, uint32_t y) const {
     auto& entity = createEntity(x, y, "assets/texture/PinkDude.png");
     m_EntMan.addComponent<InputComponent_t>(entity);
+    m_EntMan.addComponent<ColliderComponent_t>(entity);
     return entity;
 }

@@ -10,5 +10,5 @@ struct PhysicsComponent_t : public ECS::ComponentBase_t<PhysicsComponent_t>{
     {};
     
     uint32_t posX { 0 }, posY { 0 };
-    int32_t velX { 1 }, velY { 1 }; 
+    int32_t velX { 0 }, velY { 0 }; 
 };

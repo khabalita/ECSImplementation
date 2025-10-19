@@ -43,7 +43,6 @@ template <typename GameCTX_t>
 void
 RenderSystem_t<GameCTX_t>::drawAllEntities(const GameCTX_t& g) const {
     for (const auto& entity : g.getEntities()) {
-        std::cout << "  Checking entity ID: " << entity.getEntityID() << "\n";
         const auto* phy = entity.template getComponent<PhysicsComponent_t>();
         const auto* ren = entity.template getComponent<RenderComponent_t>();
 
