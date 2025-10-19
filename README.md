@@ -17,9 +17,9 @@ Main features:
   - Entity factory
     
   - Component storage
-      - RenderComponent
-      - InputComponent
-      - PhysicsComponent
+      - RenderComponent (width, height, sprite (raylib))
+      - InputComponent  (keybord (raylib))
+      - PhysicsComponent (position X, Y)
       - ColliderComponent
     
   - Resource management, currently Textures
@@ -27,5 +27,14 @@ Main features:
   - Systems responsible for bringing components to life
       - RenderSystem
       - PhysicsSystem
+      - MovementSystem
       - InputSystem
       - CollisionSystem
+
+Changelog:
+
+  - fixed -> Sprite Texture loaded and unloaded correctly
+  - fixed -> InputSystem with keyboard
+  
+  - bug   -> Velocity is more faster to left and up
+  - bug   -> Colliision not working correctly

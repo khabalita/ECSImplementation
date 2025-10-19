@@ -13,8 +13,6 @@ struct RenderComponent_t : public ECS::ComponentBase_t<RenderComponent_t>{
     {};
 
     RenderComponent_t(ECS::EntityID_t eid, ECS::ResourceManager_t& rm, const std::string_view& filename);
-
-    //volver a mirar video 33 y 34
     
     uint32_t w { 0 }, h { 0 }; // tamaño, enteros de 32 bits, inicializados en 0
     Texture2D* texture { nullptr};

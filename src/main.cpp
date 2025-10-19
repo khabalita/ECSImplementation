@@ -20,12 +20,13 @@ int main (){
         ECS::Keyboard_t keyboard;
         ECS::EntityManager_t EntityMan;
         ECS::ResourceManager_t ResourceMan;
+        
         //Systems
         RenderSystem_t<ECS::EntityManager_t> Render{ kSCRWIDTH, kSCRHEIGHT};
         PhysicsSystem_t<ECS::EntityManager_t> Physics;
-        MovementSystem_t<ECS::EntityManager_t> Movement;
-        
+        MovementSystem_t<ECS::EntityManager_t> Movement; 
         CollisionSystem_t<ECS::EntityManager_t> Collision{ kSCRWIDTH, kSCRHEIGHT };
+
         // !REVISAR INPUT!
         InputSystem_t<ECS::EntityManager_t> Input(keyboard);
         SpawnerSystem_t<ECS::EntityManager_t> Spawn;

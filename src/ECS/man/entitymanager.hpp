@@ -68,13 +68,7 @@ struct EntityManager_t {
 
     const Vec_t<Entity_t>& getEntities() const { return m_Entity; }
          Vec_t<Entity_t>& getEntities()        { return m_Entity; }
-    /*
-    const Vec_t<PhysicsComponent_t>& getPhysicsComponents() const { return m_Components.getComponents<PhysicsComponent_t>(); };
-          Vec_t<PhysicsComponent_t>& getPhysicsComponents()       { return m_Components.getComponents<PhysicsComponent_t>(); };
-    
-    const Vec_t<RenderComponent_t>& getRenderComponents() const { return m_Components.getComponents<RenderComponent_t>(); };
-          Vec_t<RenderComponent_t>& getRenderComponents()       { return m_Components.getComponents<RenderComponent_t>(); };
-    */
+
     ResourceManager_t& getResourceManager() { return m_Resources; }
     
 private:

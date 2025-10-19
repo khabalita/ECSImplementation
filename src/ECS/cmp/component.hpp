@@ -7,7 +7,7 @@ namespace ECS {
 // todos los componentes van a heredar de esta clase para tener un tipo en comun (ID)
 // Ademas todos los componentes van a tener un ID a su entidad, obligatorio
 struct Component_t {
-    //todos los commponentes tienen que llamar al constructor de component
+    // todos los commponentes tienen que llamar al constructor de component
     explicit Component_t(EntityID_t eid)
         : entityID { eid }
     {}
