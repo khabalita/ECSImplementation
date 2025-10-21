@@ -47,7 +47,6 @@ int main (){
         //main
         while (Render.update( EntityMan )) {
             float delta = GetFrameTime();
-            keyboard.updateState();
             Input.update( EntityMan);
             Physics.update ( EntityMan, delta);
             Movement.update ( EntityMan, delta);

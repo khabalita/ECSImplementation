@@ -50,6 +50,9 @@
         "stack": "cpp",
         "unordered_map": "cpp",
         "variant": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "fstream": "cpp",
+        "charconv": "cpp",
+        "forward_list": "cpp"
     }
 }
