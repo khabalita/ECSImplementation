@@ -14,15 +14,33 @@ CollisionSystem_t<GameCTX_t>::update(GameCTX_t& g) const {
         auto* phy = g.template getRequiredComponent<ColliderComponent_t, PhysicsComponent_t>(col);
         if(!phy) continue;
 
-        // convierte las coordenadas de sprites en coordenadas de pantalla
-        auto xL { phy->posX + col.box.xLeft  };
-        auto xR { phy->posX + col.box.xRight };
-        auto yU { phy->posY + col.box.yUp    };
-        auto yD { phy->posY + col.box.yDown  };
+        // Convierte las coordenadas de sprites en coordenadas de pantalla
+        auto xL { phy->posX + col.box.xLeft  }; //xL --> xLeft
+        auto xR { phy->posX + col.box.xRight }; //xR --> xRight
+        auto yU { phy->posY + col.box.yUp    }; //yU --> yUp
+        auto yD { phy->posY + col.box.yDown  }; //yD --> yDown
 
-        // colisiones
-        if(xL > m_w || xR > m_w) { phy->posX -= phy->velX; phy->posX = -phy->velX; }
-        if(yU > m_w || yD > m_w) { phy->posY -= phy->velY; phy->posY = -phy->velY; }
+        if (xL < 0) {
+            // Reajusta posX para que el borde izquierdo (xL) quede exactamente en 0
+            phy->posX -= xL; 
+            phy->velX = 0;
+        }
+
+        if (xR > m_w) {
+            // Reajusta posX para que el borde derecho (xR) quede exactamente en m_w
+            phy->posX -= (xR - m_w);
+            phy->velX = 0;
+        }
+
+        if (yU < 0) {
+            phy->posY -= yU;
+            phy->velY = 0;
+        }
+
+        if (yD > m_h) {
+            phy->posY -= (yD - m_h);
+            phy->velY = 0;
+        }
     }
     return true;
 }

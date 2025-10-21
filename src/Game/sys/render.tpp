@@ -59,7 +59,7 @@ RenderSystem_t<GameCTX_t>::drawEntity( const RenderComponent_t& ren, const Physi
     if (ren.texture && ren.texture->id !=0) {
         DrawTextureEx(
             *ren.texture,
-            { static_cast<float>(phy.posX), static_cast<float>(phy.posY) },
+            { phy.posX, phy.posY },
             0.0f,
             1.0f,
             WHITE
