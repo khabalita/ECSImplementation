@@ -11,6 +11,8 @@
     -Llibs -lboundingbox \
     -L/opt/homebrew/opt/raylib/lib -lraylib
 
+// EJECUTA EL PROCESSOR \
+    processor assets/textures/PinkDude.png metadata/colliders.json
 
 // Función auxiliar para guardar los resultados
 void save_bbox_to_file(const std::string& output_filename, const std::string& asset_name, const BoundingBox_t& bbox) {
@@ -35,7 +37,7 @@ void save_bbox_to_file(const std::string& output_filename, const std::string& as
 int main(int argc, char* argv[]) {
     if (argc < 3) {
         std::cerr << "Uso correcto: " << argv[0] << " <archivo_input.png> <archivo_output.json>" << std::endl;
-        std::cerr << "Ejemplo: " << argv[0] << " assets/textures/player.png metadata/colliders.json" << std::endl;
+        std::cerr << "Ejemplo: " << argv[0] << " assets/texture/PinkDude.png metadata/colliders.json" << std::endl;
         return 1;
     }
 

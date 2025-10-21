@@ -19,7 +19,8 @@ struct GameObjectFactory_t{
         : m_EntMan(em), m_ResMan(res)
     {}
 
-    ECS::Entity_t& createEntity(uint32_t x, uint32_t y, const std::string_view filename) const;
+    ECS::Entity_t& createEntity(uint32_t x, uint32_t y, const std::string_view texturePath,
+                                  const std::string_view jsonKey) const;
     ECS::Entity_t& createPlayer(uint32_t x, uint32_t y) const;
 
     template <typename CALLABLE_t>

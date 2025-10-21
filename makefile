@@ -22,9 +22,9 @@ $(patsubst %.c,%.h,$(patsubst %.cpp,%.hpp,$(1)))
 endef
 
 APP 	 := Game
-CCFLAGS  := -Wall -Wextra -pedantic -std=c++20 -I$(shell brew --prefix raylib)/include -Isrc#Flags de compilacion
+CCFLAGS  := -Wall -Wextra -pedantic -std=c++20 -Inlohmann -I$(shell brew --prefix raylib)/include -Isrc#Flags de compilacion
 CFLAGS   := -Wall -pedantic 
-CC 	     := g++ -fsanitize=address #Compilador de C++
+CC 	     := clang++ -fsanitize=address #Compilador de C++
 C		 := gcc #Compilador de C
 SANITIZE := -fsanitize=address #flag para detectar fugas de memoria o acceso restringido (en etapa de linker)
 MKDIR    := mkdir -p

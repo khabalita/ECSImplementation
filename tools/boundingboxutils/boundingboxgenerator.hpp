@@ -4,10 +4,8 @@
 #include <limits>   // Necesario para std::numeric_limits
 #include <cstdint>  // Buena práctica para tipos de enteros fijos (opcional)
 
-/**
- * @brief Estructura que define la caja delimitadora (Bounding Box) mínima.
- * Los valores son offsets (desplazamientos) desde el origen (0,0) del sprite.
- */
+
+// Estructura que define la caja delimitadora (Bounding Box) mínima.
 struct BoundingBox_t {
     // xLeft e yUp son los índices mínimos (más cercanos a 0)
     uint32_t xLeft;
@@ -17,9 +15,5 @@ struct BoundingBox_t {
     uint32_t yDown;
 };
 
-/**
- * @brief Calcula el Bounding Box más ajustado alrededor de los píxeles opacos de una imagen.
- * * @param filename El path al archivo de imagen (ej: "assets/texture/sprite.png").
- * @return BoundingBox La estructura con los índices de los límites.
- */
+// Calcula el Bounding Box más ajustado alrededor de los píxeles opacos de una imagen.
 BoundingBox_t calculate_bbox(const char* filename);

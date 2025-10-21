@@ -15,10 +15,10 @@ CollisionSystem_t<GameCTX_t>::update(GameCTX_t& g) const {
         if(!phy) continue;
 
         // Convierte las coordenadas de sprites en coordenadas de pantalla
-        auto xL { phy->posX + col.boxRoot.box.xLeft  }; //xL --> xLeft
-        auto xR { phy->posX + col.boxRoot.box.xRight }; //xR --> xRight
-        auto yU { phy->posY + col.boxRoot.box.yUp    }; //yU --> yUp
-        auto yD { phy->posY + col.boxRoot.box.yDown  }; //yD --> yDown
+        auto xL { phy->posX + col.xLeft  }; //xL --> xLeft
+        auto xR { phy->posX + col.xRight }; //xR --> xRight
+        auto yU { phy->posY + col.yUp    }; //yU --> yUp
+        auto yD { phy->posY + col.yDown  }; //yD --> yDown
 
         if (xL < 0) {
             // Reajusta posX para que el borde izquierdo (xL) quede exactamente en 0

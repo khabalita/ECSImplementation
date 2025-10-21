@@ -9,29 +9,50 @@
 #include <Game/sys/movement.tpp>
 #include <Game/cmp/collider.hpp>
 #include <Game/util/gameobjectfactory.hpp>
+#include <Game/data/metadata.hpp>
 #include <raylib.h>
 
 constexpr uint32_t kSCRWIDTH  { 640 };
 constexpr uint32_t kSCRHEIGHT { 360 };
 
+ColliderMetadataMap metadata_map;
+
 int main (){
     try{
+
+        // ----------------------------------------------------
+        //  CARGA DE METADATOS
+        // ----------------------------------------------------
+
+        metadata_map = LoadColliderMetadata("metadata/colliders.json"); 
+        
+        if (metadata_map.empty()) {
+            std::cerr << "ADVERTENCIA: No se pudieron cargar metadatos de colisión o el archivo está vacío. Las colisiones podrían fallar." << std::endl;
+        }
+
+        // ----------------------------------------------------
+        //  INICIALIZADOR DE MANAGERS
+        // ----------------------------------------------------
 
         ECS::Keyboard_t keyboard;
         ECS::EntityManager_t EntityMan;
         ECS::ResourceManager_t ResourceMan;
+
+        // ----------------------------------------------------
+        //  INICIALIZADOR DE SISTEMAS
+        // ----------------------------------------------------
         
-        //Systems
         RenderSystem_t<ECS::EntityManager_t> Render{ kSCRWIDTH, kSCRHEIGHT};
         PhysicsSystem_t<ECS::EntityManager_t> Physics;
         MovementSystem_t<ECS::EntityManager_t> Movement; 
         CollisionSystem_t<ECS::EntityManager_t> Collision{ kSCRWIDTH, kSCRHEIGHT };
-
-        // !REVISAR INPUT!
         InputSystem_t<ECS::EntityManager_t> Input(keyboard);
         SpawnerSystem_t<ECS::EntityManager_t> Spawn;
 
-        //Entities
+        // ----------------------------------------------------
+        //  INICIALIZADOR DE FABRICAS
+        // ----------------------------------------------------
+
         GameObjectFactory_t GOFactory { EntityMan, ResourceMan};
         GOFactory.createPlayer(50, 200);
         GOFactory.createSpawner(200, 1,
@@ -44,7 +65,10 @@ int main (){
                 std::cout << "Test Lambda \n";
         }); 
 
-        //main
+        // ----------------------------------------------------
+        //  BUCLE PRINCIPAL DE JUEGO
+        // ----------------------------------------------------
+
         while (Render.update( EntityMan )) {
             float delta = GetFrameTime();
             Input.update( EntityMan);
