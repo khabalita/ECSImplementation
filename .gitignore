@@ -1,7 +1,21 @@
+# Archivos generados por el compilador
+*.o
+*.obj
+
+# Archivos .drawio
 *.drawio
+
+# Ejecutables
+Game
+Processor
+# Subdirectorios adicionales
+build/
+bin/
+tmp/
 
 # 1- ignora la carpeta assets
 assets/
+
 
 # 2- re incluye
 
