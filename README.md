@@ -33,8 +33,13 @@ Main features:
 
 Changelog:
 
-  - fixed -> Sprite Texture loaded and unloaded correctly
-  - fixed -> InputSystem with keyboard
+  21/10
   
-  - bug   -> Velocity is more faster to left and up
-  - bug   -> Colliision not working correctly
+  - created -> library "libboundingbox" to adjust sprite collisions
+    
+  - added -> Nlohmann library for handling JSON
+  - added -> metadata files to parse JSON
+    
+  - fixed -> Sprite Texture loaded and unloaded correctly on ResourceManager
+  - fixed -> InputSystem with keyboard
+  - fixed -> GameObjectFactory using library "libboundingbox"
