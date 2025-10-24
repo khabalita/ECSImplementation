@@ -53,19 +53,14 @@ GameObjectFactory_t::createEntity(uint32_t x, uint32_t y,
     return entity;
 }
 
-// Usaremos "PinkDude" como clave de búsqueda en el JSON (si tu processor lo usa así)
-
 ECS::Entity_t&
 GameObjectFactory_t::createPlayer(uint32_t x, uint32_t y) const {
     
     // Ruta que Raylib usa para cargar (path completo)
-    const std::string path = "assets/texture/"; 
+    const std::string path = "assets/texture/Player.png"; 
     
     // Clave que se usa para buscar en el JSON (solo nombre base)
-    const std::string jsonKey = ""; 
-    
-    // La clave es lo que tu 'processor' puso en el JSON.
-    // Asumimos que el JSON tiene la clave "PinkDude".
+    const std::string jsonKey = "Player"; 
 
     // Llamamos a createEntity con AMBOS parámetros
     auto& entity = createEntity(x, y, path, jsonKey); 
