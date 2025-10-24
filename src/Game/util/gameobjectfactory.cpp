@@ -59,10 +59,10 @@ ECS::Entity_t&
 GameObjectFactory_t::createPlayer(uint32_t x, uint32_t y) const {
     
     // Ruta que Raylib usa para cargar (path completo)
-    const std::string path = "assets/texture/PinkDude.png"; 
+    const std::string path = "assets/texture/"; 
     
     // Clave que se usa para buscar en el JSON (solo nombre base)
-    const std::string jsonKey = "PinkDude"; 
+    const std::string jsonKey = ""; 
     
     // La clave es lo que tu 'processor' puso en el JSON.
     // Asumimos que el JSON tiene la clave "PinkDude".

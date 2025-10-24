@@ -5,6 +5,11 @@
 # Archivos .drawio
 *.drawio
 
+# Directorios
+obj/
+metadata/
+tools/
+nlohmann/
 # Ejecutables
 Game
 Processor
